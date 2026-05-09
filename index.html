@@ -94,8 +94,9 @@
             cursor: pointer;
             transition: all 0.15s ease;
             border-radius: 4px;
+            touch-action: manipulation;
         }
-
+        
         button:hover {
             background: var(--btn-hover);
             border-color: #444;
@@ -125,8 +126,7 @@
         .clear {
             color: #ff453a;
         }
-
-        /* Responsive UI for Mobile */
+        
         @media (max-width: 600px) {
             .calculator {
                 padding: 20px;
@@ -192,11 +192,10 @@
 
     function calculate() {
         try {
-            // Evaluates mathematical string safely
+            
             let result = eval(display.value.replace('×', '*').replace('÷', '/'));
             if (result === undefined) return;
             
-            // Format result to avoid long decimals
             display.value = Number.isInteger(result) ? result : parseFloat(result.toFixed(8));
         } catch (e) {
             display.value = "Error";
@@ -204,7 +203,6 @@
         }
     }
 
-    // Allow keyboard support
     document.addEventListener('keydown', (e) => {
         if (e.key >= 0 && e.key <= 9) appendValue(e.key);
         if (e.key === '.') appendValue('.');
